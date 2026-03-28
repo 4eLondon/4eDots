@@ -3,6 +3,11 @@
 file="$HOME/.bashrc"
 module=""
 
+echo ""
+echo "========================================================"
+echo "              Bash Configuration Initializer            "
+echo "========================================================"
+echo ""
 echo "Initializing default files..."
 echo "Would you like a manual configuration or only the basics?"
 echo "Manual[1] Basics[2]"
@@ -14,15 +19,13 @@ if [ "$choice" -eq 1 ]; then
     echo "                 Manual Configuration                   "
     echo "========================================================"
     echo ""
-    echo " Customize your $file by slecting from a set of modules to determine your final $file"
-
-
+    echo "Customize your $file by selecting from a set of modules."
+    echo ""
 
     echo "Would you like git support? (y/n)"
     read ans
-
     if [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
-      module="$module
+        module="$module
 # + + + + + Git + + + + +
 alias gs='git status'
 alias ga='git add'
@@ -38,33 +41,33 @@ alias gm='git commit -m'
 
 parse_git() {
   local branch=\"\$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)\"
+  [ -z \"\$branch\" ] && return
   local p=\"\$(git status --porcelain 2>/dev/null)\"
   local s=\"\"
   echo \"\$p\" | grep -q \"^??\" && s=\"?\"
   echo \"\$p\" | grep -q \"^.M\"  && s=\"\${s}*\"
-  git diff --cached --quiet  || s=\"\${s}+\"
-  [ \"\$branch\" = \"main\" ] || [ \"\$branch\" = \"master\" ] && echo \" (\$branch)\$s\" || echo \" [\$branch]\$s\"
+  git diff --staged --quiet 2>/dev/null || s=\"\${s}+\"
+  if [ \"\$branch\" = \"main\" ] || [ \"\$branch\" = \"master\" ]; then
+    echo \" (\$branch)\$s\"
+  else
+    echo \" [\$branch]\$s\"
+  fi
 }
-PS1='\u@\h\[\033[32m\]$(parse_git)\[\033[00m\]\$ '"
+PS1='\''\\u@\\h:\\w\\[\\033[32m\\]\$(parse_git)\\[\\033[00m\\]\$ '\''"
     fi
-
-
 
     echo "Do you use zoxide? (y/n)"
     read ans
-
     if [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
-      module="$module
+        module="$module
 # + + + + + Zoxide + + + + +
 eval \"\$(zoxide init bash)\""
     fi
 
-
     echo "Add archive extraction function? (y/n)"
     read ans
-
     if [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
-      module="$module
+        module="$module
 # + + + + + Extract + + + + +
 extr() {
     if [ -f \"\$1\" ]; then
@@ -88,17 +91,13 @@ extr() {
 }"
     fi
 
-
-
-
     echo "Would you like yazi support? (y/n)"
     read ans
-
     if [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
-      module="$module
+        module="$module
 # + + + + + Yazi + + + + +
-function yy() {
-local tmp=\"\$(mktemp -t yazi-cwd.XXXXXX)\"
+yy() {
+  local tmp=\"\$(mktemp -t yazi-cwd.XXXXXX)\"
   yazi \"\$@\" --cwd-file=\"\$tmp\"
   if cwd=\"\$(cat -- \"\$tmp\")\" && [ -n \"\$cwd\" ] && [ \"\$cwd\" != \"\$PWD\" ]; then
     cd -- \"\$cwd\"
@@ -107,10 +106,10 @@ local tmp=\"\$(mktemp -t yazi-cwd.XXXXXX)\"
 }"
     fi
 
-echo "Do you use fzf? (y/n)"
+    echo "Do you use fzf? (y/n)"
     read ans
     if [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
-      module="$module
+        module="$module
 # + + + + + Fzf + + + + +
 eval \"\$(fzf --bash)\"
 export FZF_DEFAULT_COMMAND='find . -type f'
@@ -119,11 +118,10 @@ alias fv='fzf | xargs nvim'
 alias fcd='cd \"\$(find . -type d | fzf)\"'"
     fi
 
-
-echo "Do you use SSH? (y/n)"
+    echo "Do you use SSH? (y/n)"
     read ans
     if [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
-      module="$module
+        module="$module
 # + + + + + SSH + + + + +
 alias ssha='eval \"\$(ssh-agent -s)\" && ssh-add'
 alias sshk='ssh-add -l'
@@ -131,20 +129,19 @@ alias sshkill='kill \$SSH_AGENT_PID'
 alias scp='scp -r'"
     fi
 
-
-    echo "Do you use exa? (y/n)"
+    echo "Do you use eza? (y/n)"
     read ans
     if [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
-      module="$module
-# + + + + + Exa + + + + +
-alias la='exa -a --color=auto --icons'
-alias lo='exa --tree -a --icons'"
+        module="$module
+# + + + + + Eza + + + + +
+alias ll='eza -a --color=auto --icons'
+alias lo='eza --tree -a --icons'"
     fi
 
-echo "Do you use neovim? (y/n)"
+    echo "Do you use neovim? (y/n)"
     read ans
     if [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
-      module="$module
+        module="$module
 # + + + + + Neovim + + + + +
 export EDITOR=nvim
 export GIT_EDITOR=nvim
@@ -155,11 +152,10 @@ alias nvrc='nvim \$HOME/.config/nvim/init.lua'
 alias nvcfg='cd \$HOME/.config/nvim && nvim .'"
     fi
 
-
-echo "Do you use ripgrep/fd? (y/n)"
+    echo "Do you use ripgrep/fd? (y/n)"
     read ans
     if [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
-      module="$module
+        module="$module
 # + + + + + Ripgrep/fd + + + + +
 alias rg='rg --color=always'
 alias rgi='rg -i'
@@ -173,7 +169,7 @@ alias fdd='fd -t d'"
     echo "Do you use docker? (y/n)"
     read ans
     if [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
-      module="$module
+        module="$module
 # + + + + + Docker + + + + +
 alias dps='docker ps'
 alias dpsa='docker ps -a'
@@ -186,12 +182,10 @@ alias dcr='docker compose restart'
 alias dcp='docker compose pull'"
     fi
 
-
-
     echo "Do you use Python? (y/n)"
     read ans
     if [ "$ans" = "y" ] || [ "$ans" = "Y" ]; then
-      module="$module
+        module="$module
 # + + + + + Python + + + + +
 alias py='python3'
 alias pip='pip3'
@@ -200,7 +194,7 @@ alias openve='source .venv/bin/activate'
 alias closeve='deactivate'"
     fi
 
-cat > "$HOME/.bashrc" << 'EOF'
+    cat > "$file" << 'EOF'
 #
 # ~/.bashrc
 #
@@ -221,7 +215,6 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # = = = = = Performance = = = = =
 shopt -s cdable_vars
-complete -d cd
 shopt -s cmdhist
 shopt -s lithist
 shopt -s cdspell
@@ -243,11 +236,14 @@ alias grep='grep --color=auto'
 alias qe='pacman -Qe'
 EOF
 
-if [ -n "$module" ]; then
-    printf '%s\n' "$module" >> "$HOME/.bashrc"
-fi
-echo "Successfully configured bashrc."
+    if [ -n "$module" ]; then
+        printf '%s\n' "$module" >> "$file"
+    else
+        echo "PS1='\\u@\\h:\\w\\\$ '" >> "$file"
+    fi
 
+    echo ""
+    echo "Successfully configured $file."
 
 elif [ "$choice" -eq 2 ]; then
     echo ""
@@ -281,7 +277,6 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # = = = = = Performance = = = = =
 shopt -s cdable_vars
-complete -d cd
 shopt -s cmdhist
 shopt -s lithist
 shopt -s cdspell
@@ -302,10 +297,10 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias qe='pacman -Qe'
 EOF
-        echo "Successfully configured bashrc."
+        echo ""
+        echo "Successfully configured $file."
     else
-        echo "Operation halted..."
-        sleep 0.5
+        echo "Operation halted."
     fi
 
 else

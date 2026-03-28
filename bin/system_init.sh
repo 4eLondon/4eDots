@@ -39,21 +39,28 @@ else
     echo "No AUR helper found."
     echo "Install yay[1] paru[2] or skip[3]?"
     read aur_choice
-    if [ "$aur_choice" -eq 1 ]; then
-        echo "Installing yay..."
-        sudo pacman -S --noconfirm --needed git base-devel
-        git clone https://aur.archlinux.org/yay.git /tmp/yay
-        cd /tmp/yay && makepkg -si --noconfirm
-        AUR_CMD="yay"
-    elif [ "$aur_choice" -eq 2 ]; then
-        echo "Installing paru..."
-        sudo pacman -S --noconfirm --needed git base-devel
-        git clone https://aur.archlinux.org/paru.git /tmp/paru
-        cd /tmp/paru && makepkg -si --noconfirm
-        AUR_CMD="paru"
-    else
-        echo "Skipping AUR helper."
-    fi
+
+    case "$aur_choice" in
+        1)
+            echo "Installing yay..."
+            sudo pacman -S --noconfirm --needed git base-devel
+            git clone https://aur.archlinux.org/yay.git /tmp/yay
+            cd /tmp/yay && makepkg -si --noconfirm
+            cd - > /dev/null
+            AUR_CMD="yay"
+            ;;
+        2)
+            echo "Installing paru..."
+            sudo pacman -S --noconfirm --needed git base-devel
+            git clone https://aur.archlinux.org/paru.git /tmp/paru
+            cd /tmp/paru && makepkg -si --noconfirm
+            cd - > /dev/null
+            AUR_CMD="paru"
+            ;;
+        *)
+            echo "Skipping AUR helper."
+            ;;
+    esac
 fi
 
 # = = = = = Section Functions = = = = =
@@ -68,126 +75,130 @@ install_wm() {
     echo "Hyprland[1] i3[2] Sway[3] bspwm[4] dwm[5] GNOME[6] KDE[7] skip[8]"
     read wm_choice
 
-    if [ "$wm_choice" -eq 1 ]; then
-        echo "Installing Hyprland and dependencies..."
-        sudo pacman -S --noconfirm --needed \
-            hyprland \
-            xdg-desktop-portal-hyprland \
-            waybar \
-            wofi \
-            dunst \
-            hyprpaper \
-            hyprlock \
-            hypridle \
-            pipewire \
-            pipewire-pulse \
-            pipewire-alsa \
-            wireplumber \
-            polkit-gnome \
-            qt5-wayland \
-            qt6-wayland \
-            wl-clipboard \
-            grim \
-            slurp \
-            cliphist
-        if [ -n "$AUR_CMD" ]; then
-            aur_install hyprshot
-        fi
-
-    elif [ "$wm_choice" -eq 2 ]; then
-        echo "Installing i3 and dependencies..."
-        sudo pacman -S --noconfirm --needed \
-            i3-wm \
-            i3status \
-            i3lock \
-            i3blocks \
-            dmenu \
-            picom \
-            feh \
-            dunst \
-            xorg \
-            xorg-xinit \
-            xclip \
-            arandr \
-            autorandr \
-            pipewire \
-            pipewire-pulse \
-            wireplumber \
-            polkit-gnome
-
-    elif [ "$wm_choice" -eq 3 ]; then
-        echo "Installing Sway and dependencies..."
-        sudo pacman -S --noconfirm --needed \
-            sway \
-            swaybar \
-            swaylock \
-            swayidle \
-            wofi \
-            dunst \
-            waybar \
-            pipewire \
-            pipewire-pulse \
-            wireplumber \
-            wl-clipboard \
-            grim \
-            slurp \
-            polkit-gnome \
-            qt5-wayland \
-            qt6-wayland
-
-    elif [ "$wm_choice" -eq 4 ]; then
-        echo "Installing bspwm and dependencies..."
-        sudo pacman -S --noconfirm --needed \
-            bspwm \
-            sxhkd \
-            picom \
-            polybar \
-            dmenu \
-            feh \
-            dunst \
-            xorg \
-            xorg-xinit \
-            xclip \
-            arandr \
-            pipewire \
-            pipewire-pulse \
-            wireplumber \
-            polkit-gnome
-
-    elif [ "$wm_choice" -eq 5 ]; then
-        echo "Installing dwm dependencies..."
-        sudo pacman -S --noconfirm --needed \
-            base-devel \
-            libx11 \
-            libxft \
-            libxinerama \
-            xorg \
-            xorg-xinit \
-            picom \
-            feh \
-            dunst \
-            xclip \
-            pipewire \
-            pipewire-pulse \
-            wireplumber
-        echo ""
-        echo "dwm must be compiled from source."
-        echo "Clone from https://suckless.org or your own fork and run make && sudo make install"
-
-    elif [ "$wm_choice" -eq 6 ]; then
-        echo "Installing GNOME..."
-        pac_group gnome
-        sudo systemctl enable gdm
-
-    elif [ "$wm_choice" -eq 7 ]; then
-        echo "Installing KDE Plasma..."
-        pac_group plasma
-        pac_group kde-applications
-        sudo systemctl enable sddm
-
-    else
-        echo "Skipping window manager install."
-    fi
+    case "$wm_choice" in
+        1)
+            echo "Installing Hyprland and dependencies..."
+            sudo pacman -S --noconfirm --needed \
+                hyprland \
+                xdg-desktop-portal-hyprland \
+                waybar \
+                wofi \
+                dunst \
+                hyprpaper \
+                hyprlock \
+                hypridle \
+                pipewire \
+                pipewire-pulse \
+                pipewire-alsa \
+                wireplumber \
+                polkit-gnome \
+                qt5-wayland \
+                qt6-wayland \
+                wl-clipboard \
+                grim \
+                slurp \
+                cliphist
+            if [ -n "$AUR_CMD" ]; then
+                aur_install hyprshot
+            fi
+            ;;
+        2)
+            echo "Installing i3 and dependencies..."
+            sudo pacman -S --noconfirm --needed \
+                i3-wm \
+                i3status \
+                i3lock \
+                i3blocks \
+                dmenu \
+                picom \
+                feh \
+                dunst \
+                xorg \
+                xorg-xinit \
+                xclip \
+                arandr \
+                autorandr \
+                pipewire \
+                pipewire-pulse \
+                wireplumber \
+                polkit-gnome
+            ;;
+        3)
+            echo "Installing Sway and dependencies..."
+            sudo pacman -S --noconfirm --needed \
+                sway \
+                swaylock \
+                swayidle \
+                wofi \
+                dunst \
+                waybar \
+                pipewire \
+                pipewire-pulse \
+                wireplumber \
+                wl-clipboard \
+                grim \
+                slurp \
+                polkit-gnome \
+                qt5-wayland \
+                qt6-wayland
+            ;;
+        4)
+            echo "Installing bspwm and dependencies..."
+            sudo pacman -S --noconfirm --needed \
+                bspwm \
+                sxhkd \
+                picom \
+                polybar \
+                dmenu \
+                feh \
+                dunst \
+                xorg \
+                xorg-xinit \
+                xclip \
+                arandr \
+                pipewire \
+                pipewire-pulse \
+                wireplumber \
+                polkit-gnome
+            ;;
+        5)
+            echo "Installing dwm dependencies..."
+            sudo pacman -S --noconfirm --needed \
+                base-devel \
+                libx11 \
+                libxft \
+                libxinerama \
+                xorg \
+                xorg-xinit \
+                picom \
+                feh \
+                dunst \
+                xclip \
+                pipewire \
+                pipewire-pulse \
+                wireplumber
+            echo ""
+            echo "dwm must be compiled from source."
+            echo "Clone from https://suckless.org or your own fork and run: make && sudo make install"
+            ;;
+        6)
+            echo "Installing GNOME..."
+            pac_group gnome
+            sudo systemctl enable gdm
+            ;;
+        7)
+            echo "Installing KDE Plasma..."
+            pac_group plasma
+            pac_group kde-applications
+            sudo systemctl enable sddm
+            ;;
+        8)
+            echo "Skipping window manager install."
+            ;;
+        *)
+            echo "Invalid option, skipping window manager install."
+            ;;
+    esac
 }
 
 install_core() {
@@ -270,8 +281,8 @@ install_core() {
         sudo pacman -S --noconfirm --needed zip unzip tar p7zip unrar
     fi
 
-    if ask "Install system monitoring? (btop + htop)"; then
-        sudo pacman -S --noconfirm --needed btop
+    if ask "Install system monitoring? (btop)"; then
+        install btop
     fi
 
     if ask "Install printing support?"; then
@@ -290,7 +301,7 @@ install_gui() {
     echo "--- Productivity ---"
 
     if ask "Install LibreOffice?"; then
-        sudo pacman -S --noconfirm --needed libreoffice-fresh
+        install libreoffice-fresh
     fi
 
     if ask "Install Obsidian?"; then
@@ -313,7 +324,6 @@ install_gui() {
         install evince
     fi
 
-    # - - - Browsers - - -
     echo ""
     echo "--- Browsers ---"
 
@@ -395,30 +405,30 @@ install_terminal() {
     echo "                     Terminal                           "
     echo "========================================================"
     echo ""
-
     echo "Which terminal would you like to install?"
     echo "kitty[1] alacritty[2] wezterm[3] ghostty[4] skip[5]"
     read term_choice
 
-    if [ "$term_choice" -eq 1 ]; then
-        install kitty
-    elif [ "$term_choice" -eq 2 ]; then
-        install alacritty
-    elif [ "$term_choice" -eq 3 ]; then
-        if [ -n "$AUR_CMD" ]; then
-            aur_install wezterm
-        else
-            echo "Wezterm requires an AUR helper, skipping."
-        fi
-    elif [ "$term_choice" -eq 4 ]; then
-        if [ -n "$AUR_CMD" ]; then
-            aur_install ghostty
-        else
-            echo "Ghostty requires an AUR helper, skipping."
-        fi
-    else
-        echo "Skipping terminal install."
-    fi
+    case "$term_choice" in
+        1) install kitty ;;
+        2) install alacritty ;;
+        3)
+            if [ -n "$AUR_CMD" ]; then
+                aur_install wezterm
+            else
+                echo "Wezterm requires an AUR helper, skipping."
+            fi
+            ;;
+        4)
+            if [ -n "$AUR_CMD" ]; then
+                aur_install ghostty
+            else
+                echo "Ghostty requires an AUR helper, skipping."
+            fi
+            ;;
+        5) echo "Skipping terminal install." ;;
+        *) echo "Invalid option, skipping terminal install." ;;
+    esac
 
     echo ""
     echo "========================================================"
@@ -446,8 +456,8 @@ install_terminal() {
         install fzf
     fi
 
-    if ask "Install exa?"; then
-        install exa
+    if ask "Install eza?"; then
+        install eza
     fi
 
     if ask "Install ripgrep?"; then
@@ -506,19 +516,14 @@ while [ "$done_installing" = false ]; do
     echo "Select an option:"
     read section
 
-    if [ "$section" -eq 1 ]; then
-        install_wm
-    elif [ "$section" -eq 2 ]; then
-        install_core
-    elif [ "$section" -eq 3 ]; then
-        install_gui
-    elif [ "$section" -eq 4 ]; then
-        install_terminal
-    elif [ "$section" -eq 5 ]; then
-        done_installing=true
-    else
-        echo "Invalid option, please enter 1-5."
-    fi
+    case "$section" in
+        1) install_wm ;;
+        2) install_core ;;
+        3) install_gui ;;
+        4) install_terminal ;;
+        5) done_installing=true ;;
+        *) echo "Invalid option, please enter 1-5." ;;
+    esac
 done
 
 # = = = = = Done = = = = =
