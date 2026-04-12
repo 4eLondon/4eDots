@@ -1,13 +1,13 @@
 # 4e_dotfiles
 
-My personal Linux dotfiles for various window managers and desktop environments. 
+My personal Linux dotfiles for various window managers and desktop environments.
 
 ## 🖥️ Window Managers
 
 This repository contains configurations for:
 
 - **i3** - Lightweight tiling window manager
-- **bspwm** - Binary space partitioning window manager  
+- **bspwm** - Binary space partitioning window manager
 - **Sway** - i3-compatible Wayland compositor
 
 ## 📦 What's Included
@@ -32,7 +32,6 @@ Each configuration includes setups for:
   <img src="Assets/i3_Everforest.png" width="49%" />
 </p>
 
-Clean, minimal setup with a focus on productivity and aesthetics.
 
 ### Sway Configuration
 
@@ -42,7 +41,15 @@ Clean, minimal setup with a focus on productivity and aesthetics.
   <img src="Assets/Sway_Oceanblue.jpeg" width="49%" />
 </p>
 
-Clean, minimal setup with a focus on productivity and aesthetics.
+### Hyprland Configuration
+
+
+<p align="center">
+  <img src="Assets/Hyprland_Portal.png" width="49%" />
+  <img src="Assets/Hyprland_Keyboard.png" width="49%" />
+</p>
+
+
 
 ## 🚀 Quick Start
 
