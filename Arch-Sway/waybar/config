@@ -28,16 +28,11 @@
 "sway/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
-    "format": "{name}",
+    "format": "{name} {icon}",
     "format-icons": {
-        "1": "󰇄",
-        "2": "",
-        "3": "",
-        "4": "",
-        "5": "",
         "urgent": "",
         "focused": "",
-        "default": ""
+        "default": ""
     }
 },
 
@@ -121,7 +116,7 @@
     // Memory
     "memory": {
         "format": "{}% ",
-        "interval": 2, 
+        "interval": 2,
         "on-click": "kitty --class=btop-terminal -e btop",
         "on-click-right": "pkill -f 'kitty.*btop'"
     },
