@@ -1,0 +1,141 @@
+{
+    // General Settings
+    "layer": "top",
+    "position": "top",
+    "height": 35,
+    "spacing": 4,
+    "margin-top": 0,
+    "margin-bottom": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+
+    // Style
+    "css": "~/.config/waybar/style.css",
+
+    // Module Layout
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "network",
+        "temperature",
+        "cpu",
+        "memory",
+        "disk",
+        "pulseaudio",
+        "backlight",
+        "battery",
+        "tray"
+    ],
+
+    // Module Configurations
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+      	 "urgent": "",
+      	 "empty": "󰄗",
+         "focused": "",
+         "default": ""
+        }
+    },
+
+    "sway/mode": {
+        // Uses default configuration
+    },
+
+    "clock": {
+        "format": "{:%H:%M:%S}",
+        "tooltip-format": "<big>{:%A %d %B %Y}</big>\n<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1
+        },
+        "interval": 1
+    },
+
+    "network": {
+        "format": "{ifname}",
+        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-ethernet": "󰊗 {ifname}",
+        "format-disconnected": "󰖪 Disconnected",
+        "format-linked": "󰊗 {ifname} (No IP)",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}"
+    },
+
+    "temperature": {
+        "thermal-zone": 0,
+        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""],
+        "tooltip": true
+    },
+
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false,
+        "interval": 2
+    },
+
+    "memory": {
+        "format": "{}% ",
+        "interval": 2
+    },
+
+    "disk": {
+        "interval": 30,
+        "format": "{percentage_used}% ",
+        "path": "/",
+        "tooltip-format": "{used} / {total} ({percentage_used}%)"
+    },
+
+    "pulseaudio": {
+        "format": "{volume}% {icon}",
+        "format-muted": " Muted",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-bluetooth-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "scroll-step": 1
+    },
+
+    "backlight": {
+        "device": "amdgpu_bl1",
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", "", "", "", "󰽦", ""],
+        "on-scroll-up": "brightnessctl set 5%+",
+        "on-scroll-down": "brightnessctl set 5%-"
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% 󱐋",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+    }
+}

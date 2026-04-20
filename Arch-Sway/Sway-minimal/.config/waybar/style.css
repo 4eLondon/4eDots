@@ -1,0 +1,154 @@
+/* ============================================
+   Waybar Style Configuration
+   ============================================ */
+
+/* Global Reset & Base Styles */
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "GohuFont 11 Nerd Font", monospace;
+    font-size: 12px;
+    font-weight: bold;
+    min-height: 0;
+}
+
+/* Main Window */
+window#waybar {
+    background: rgba(12, 13, 15, 0.5);
+    color: #ffffff;
+    border-bottom: none;
+}
+
+/* ============================================
+   Workspaces
+   ============================================ */
+#workspaces button {
+    padding: 0 12px;
+    background: transparent;
+    color: #888888;
+    border-bottom: 2px solid transparent;
+    margin: 0 2px;
+}
+
+#workspaces button.active {
+    color: #000000;
+    background-color: #ffffff;
+    border-radius: 50%;
+    padding: 4px 8px;
+    min-width: 24px;
+    border: none;
+}
+
+#workspaces button:hover {
+    background: transparent;
+    color: #ffffff;
+}
+
+/* ============================================
+   Window Title
+   ============================================ */
+#window {
+    color: #cccccc;
+    padding: 0 16px;
+}
+
+/* ============================================
+   System Modules
+   ============================================ */
+
+/* Network */
+#network {
+    color: #aaaaaa;
+    padding: 0 12px;
+}
+
+/* Audio */
+#pulseaudio {
+    color: #bbbbbb;
+    padding: 0 12px;
+}
+
+/* Brightness */
+#backlight {
+    color: #999999;
+    padding: 0 12px;
+}
+
+/* Battery */
+#battery {
+    color: #dddddd;
+    padding: 0 12px;
+    background: transparent;
+}
+
+#battery.warning {
+    color: #ffaa00;
+    background: transparent;
+}
+
+#battery.critical {
+    color: #ff0000;
+    background: transparent;
+}
+
+#battery.charging {
+    background: transparent;
+}
+
+#battery:hover,
+#battery:focus,
+#battery:active {
+    background: transparent;
+}
+
+/* CPU */
+#cpu {
+    color: #bbbbbb;
+    padding: 0 12px;
+}
+
+/* Memory */
+#memory {
+    color: #cccccc;
+    padding: 0 12px;
+}
+
+/* Temperature */
+#temperature {
+    color: #bbbbbb;
+    padding: 0 12px;
+}
+
+/* Disk */
+#disk {
+    color: #aaaaaa;
+    padding: 0 12px;
+}
+
+/* ============================================
+   Utilities
+   ============================================ */
+
+/* Clock */
+#clock {
+    color: #eeeeee;
+    padding: 0 12px;
+}
+
+/* System Tray */
+#tray {
+    color: #ffffff;
+    padding: 0 12px;
+}
+
+/* Mode Indicator */
+#mode {
+    color: #999999;
+    padding: 0 12px;
+}
+
+/* Custom Media */
+#custom-media {
+    color: #aaaaaa;
+    padding: 0 12px;
+}
