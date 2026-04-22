@@ -13,7 +13,7 @@ export PAGER=less
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.bin:$PATH"
 bind "set completion-ignore-case on"
 bind "set show-all-if-ambiguous on"
 
@@ -43,7 +43,8 @@ alias ....='cd ../../..'
 alias ls='ls -a --color=auto'
 alias grep='grep --color=auto'
 alias qe='pacman -Qe'
-
+alias df='df -h'
+alias du='df -h'
 
 
 # + + [ User Aliases ]
