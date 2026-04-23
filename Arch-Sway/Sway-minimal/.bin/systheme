@@ -3,9 +3,9 @@
 THEMES=(b1 y1 g1 r1)
 WALLPAPERS=(W1 W2 W3 W4)
 MODES=(fill fill fit fill)
-FOOT_CFG="$HOME/.config/foot/foot.ini"
 WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
-SWAY_OUTPUT="*"
+FOOT_CFG="$HOME/.config/foot/foot.ini"
+SWAY_CFG="$HOME/.config/sway/config"
 
 usage() {
     echo "Usage: $0 [1-4]"
@@ -21,14 +21,16 @@ usage() {
 IDX=$(( $1 - 1 ))
 THEME="${THEMES[$IDX]}"
 WALL="${WALLPAPERS[$IDX]}"
-
-# Detect wallpaper fit mode from current config (fill vs fit) - preserve it
 MODE="${MODES[$IDX]}"
 
 # Switch foot theme
 sed -i "s|^include=.*\.ini|include=~/.config/foot/${THEME}.ini|" "$FOOT_CFG"
 
-# Switch wallpaper live via swaymsg
-swaymsg "output $SWAY_OUTPUT bg $WALLPAPER_DIR/${WALL}.jpg $MODE"
+# Comment all wallpaper lines, then uncomment the chosen one
+sed -i -E 's|^(output \* bg ~/Pictures/Wallpapers/W[0-9]+\.jpg.*)$|#\1|' "$SWAY_CFG"
+sed -i -E "s|^#(output \* bg ~/Pictures/Wallpapers/${WALL}\.jpg.*)$|\1|" "$SWAY_CFG"
+
+# Apply wallpaper
+swaymsg "output * bg $WALLPAPER_DIR/${WALL}.jpg $MODE"
 
 echo "Switched to theme: $THEME | wallpaper: $WALL"
