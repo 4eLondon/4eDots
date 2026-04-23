@@ -39,7 +39,6 @@
         "format": "{name} {icon}",
         "format-icons": {
       	 "urgent": "",
-      	 "empty": "󰄗",
          "focused": "",
          "default": ""
         }
@@ -127,6 +126,7 @@
             "warning": 30,
             "critical": 15
         },
+        "interval": 4,
         "format": "{capacity}% {icon}",
         "format-charging": "{capacity}% 󱐋",
         "format-plugged": "{capacity}% ",
