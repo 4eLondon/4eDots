@@ -40,6 +40,7 @@ Each configuration includes setups for:
   <img src="Assets/Sway_Neongreen.jpeg" width="49%" />
   <img src="Assets/Sway_Oceanblue.jpeg" width="49%" />
   <img src="Assets/Sway_Minimal_Birdcage.png" width="49%" />
+  <img src="Assets/Sway_Minimal_OOO.png" width="49%" />
 </p>
 
 ### Hyprland Configuration
