@@ -157,6 +157,12 @@ extr() {
     fi
 }
 
+# -- Application launcher
+apps() {
+  compgen -c | sort -u | fzf --prompt="run: " | xargs -I{} swaymsg exec -- {}
+}
+bind '"\C-g": "apps\n"'
+
 # -- GitInfo
 parse_git() {
   local branch="$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)"

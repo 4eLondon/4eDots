@@ -1,7 +1,6 @@
 ### Variables
 set $mod Mod4
 set $term foot
-set $menu wmenu-run
 set $browser firefox
 
 #
@@ -69,7 +68,7 @@ seat * {
 # Basics:
 #
     bindsym $mod+q exec $term
-    bindsym $mod+d exec $menu
+    bindsym $mod+d exec foot -e bash -i -c "apps"
     bindsym $mod+b exec $browser
     bindsym $mod+shift+b exec $browser --private-window
     bindsym $mod+c kill
@@ -177,3 +176,4 @@ bar {
 # }
 
 include /etc/sway/config.d/*
+

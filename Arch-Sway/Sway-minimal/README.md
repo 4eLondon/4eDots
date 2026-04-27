@@ -27,7 +27,6 @@
 | dunst 1.13.2-1 | Customizable and lightweight notification daemon |
 | ly 1.3.2-1 | TUI display manager with ncurses |
 | wl-clipboard 1:2.3.0-1 | Command-line copy/paste utilities for Wayland |
-| wmenu 0.2.0-1 | Efficient dynamic menu for Wayland, inspired by dmenu |
 | power-profiles-daemon 0.30-1 | Makes power profiles handling available over D-Bus |
 | pulseaudio 17.0+r98+gb096704c0-1 | Feature-rich, general-purpose sound server |
 
