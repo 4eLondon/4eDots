@@ -1,0 +1,36 @@
+[user]
+	name = *NAME*
+	email = *EMAIL*
+[init]
+	defaultBranch = main
+[credential]
+	helper = store
+[fetch]
+	prune = true
+[pull]
+	rebase = false
+[push]
+    autoSetupRemote = true
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    side-by-side = true
+    line-numbers = true
+    syntax-theme = ansi
+    minus-style = red
+    minus-emph-style = bold red
+    plus-style = green
+    plus-emph-style = bold green
+    hunk-header-style = cyan bold
+    file-style = yellow bold
+    file-decoration-style = yellow ul
+    line-numbers-minus-style = red
+    line-numbers-plus-style = green
+    line-numbers-zero-style = brightblack
+    blame-code-style = normal
+    blame-palette = "#1e1e1e" "#252525" "#2a2a2a"
