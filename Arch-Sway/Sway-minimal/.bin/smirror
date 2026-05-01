@@ -1,0 +1,18 @@
+#!/bin/bash
+
+INTERNAL="eDP-1"
+EXTERNAL="HDMI-A-1"
+
+swaymsg -t subscribe '["output"]' | while read -r _; do
+    if swaymsg -t get_outputs | grep -q "$EXTERNAL.*connected"; then
+        swaymsg output "$EXTERNAL" enable
+        swaymsg output "$EXTERNAL" mode 1920x1080
+        swaymsg output "$INTERNAL" mode 1920x1080
+        swaymsg output "$EXTERNAL" position 0 0
+        swaymsg output "$INTERNAL" position 0 0
+    else
+        # fallback when HDMI unplugged
+        swaymsg output "$INTERNAL" position 0 0
+    fi
+done
+
