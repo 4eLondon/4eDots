@@ -14,7 +14,6 @@
 | wireless_tools 30.pre9-5 | Legacy tools for configuring Linux wireless extensions |
 
 
-
 ## Desktop
 | Package | Description |
 | :--: | :--|
@@ -29,7 +28,6 @@
 | wl-clipboard 1:2.3.0-1 | Command-line copy/paste utilities for Wayland |
 | power-profiles-daemon 0.30-1 | Makes power profiles handling available over D-Bus |
 | pulseaudio 17.0+r98+gb096704c0-1 | Feature-rich, general-purpose sound server |
-
 
 
 ## Niche/System specifics
@@ -55,7 +53,6 @@
 | snapper 0.13.0-3 | Tool for managing Btrfs and LVM snapshots |
 
 
-
 ## Utility
 | Package | Description |
 | :--: | :--|
@@ -72,7 +69,6 @@
 | udisks2 2.11.1-2 | D-Bus service to query and manipulate storage devices |
 
 
-
 ## GUI/Media
 | Package | Description |
 | :--: | :--|
@@ -87,7 +83,6 @@
 | cmus 2.12.0-5 | Fast and lightweight ncurses audio player |
 | imv 5.0.1-1 | Simple image viewer for Wayland and X11 |
 | steam 1.0.0.85-6 | Valve's digital software delivery platform |
-
 
 
 ## Terminal
@@ -112,13 +107,11 @@
 | wget 1.25.0-3 | Non-interactive network downloader |
 
 
-
 ## Fonts
 | Package | Description |
 | :--: | :--|
 | ttf-gohu-nerd 3.4.0-2 | GohuFont patched with Nerd Fonts icons |
 | ttf-jetbrains-mono 2.304-2 | Monospaced font for developers, by JetBrains |
-
 
 
 ## Misc/User Specific Tools
