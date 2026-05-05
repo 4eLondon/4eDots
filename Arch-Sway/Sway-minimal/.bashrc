@@ -66,7 +66,7 @@ export BAT_THEME="Nord"
 eval "$(zoxide init bash)"
 eval "$(fzf --bash)"
 alias ll='eza -a --color=auto --icons'
-alias lo='eza --tree -a --icons'
+alias lo='eza --tree -a --icons -I ".git|node_modules|.venv"'
 alias copy='wl-copy'
 alias ff='fastfetch'
 
