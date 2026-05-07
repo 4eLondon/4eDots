@@ -56,7 +56,7 @@ export EDITOR=nvim
 
 # --Python
 alias py='python3'
-alias pyserver='python -m http.server 8000 --directory ./public'
+alias pyserver='python -m http.server 8000'
 alias newve='python3 -m venv .venv'
 alias openve='source .venv/bin/activate'
 alias closeve='deactivate'
@@ -188,3 +188,25 @@ parse_git() {
 
 PS1='\[\033[34m\]\u\[\033[00m\]@\[\033[36m\]\h\[\033[00m\]:\[\033[34m\]\w\[\033[32m\]$(parse_git)\[\033[00m\]\$ '
 
+# -- Music player via mpc
+muse() {
+  case "$1" in
+    -a)  mpc clear && mpc add "$2" && mpc play ;;
+    -q)  mpc add "$2" ;;
+    -s)  mpc stop ;;
+    -n)  mpc next ;;
+    -p)  mpc prev ;;
+    -t)  mpc toggle ;;
+    -c)  mpc clear ;;
+    "")  ncmpcpp ;;
+    *)   echo "Usage: muse [-a|-q|-s|-n|-p|-t|-c] [file]"
+         echo "  -a <file>  clear playlist and play file"
+         echo "  -q <file>  queue file"
+         echo "  -s         stop"
+         echo "  -n         next"
+         echo "  -p         prev"
+         echo "  -t         toggle pause"
+         echo "  -c         clear playlist" ;;
+  esac
+}
+export MPD_HOST=~/.local/share/mpd/socket

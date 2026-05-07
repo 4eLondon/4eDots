@@ -1,0 +1,59 @@
+#!/bin/bash
+
+sudo pacman -S --noconfirm mpd mpc ncmpcpp
+
+mkdir -p ~/.config/mpd
+mkdir -p ~/.local/share/mpd/playlists
+
+cat > ~/.config/mpd/mpd.conf << 'CONF'
+music_directory    "~/Music"
+playlist_directory "~/.local/share/mpd/playlists"
+db_file            "~/.local/share/mpd/database"
+log_file           "~/.local/share/mpd/log"
+state_file         "~/.local/share/mpd/state"
+bind_to_address    "~/.local/share/mpd/socket"
+
+audio_output {
+    type "pipewire"
+    name "PipeWire"
+}
+CONF
+
+grep -qxF 'export MPD_HOST=~/.local/share/mpd/socket' ~/.bashrc \
+    || echo 'export MPD_HOST=~/.local/share/mpd/socket' >> ~/.bashrc
+
+sed -i '/^alias muse=/d' ~/.bashrc
+
+if ! grep -q 'muse()' ~/.bashrc; then
+cat >> ~/.bashrc << 'FUNC'
+
+muse() {
+  case "$1" in
+    -a) mpc clear && mpc add "$2" && mpc play ;;  # add file and play immediately
+    -q) mpc add "$2" ;;                            # queue file
+    -p) mpc toggle ;;                              # pause/resume
+    -s) mpc stop ;;                                # stop
+    -n) mpc next ;;                                # next track
+    -b) mpc prev ;;                                # previous track
+    -c) mpc clear ;;                               # clear playlist
+    "")  ncmpcpp ;;                                # open TUI
+    *)  echo "Usage: muse [-a file|-q file|-p|-s|-n|-b|-c]" ;;
+  esac
+}
+FUNC
+fi
+
+systemctl --user enable --now mpd
+
+export MPD_HOST=~/.local/share/mpd/socket
+mpc update
+
+YAZI_CONF=~/.config/yazi/yazi.toml
+if grep -q 'mpc' "$YAZI_CONF"; then
+    sed -i "s|run = '.*mpc.*'|run = 'mpc clear \&\& mpc add \"\$1\" \&\& mpc play'|" "$YAZI_CONF"
+else
+    echo "Audio opener not found in yazi.toml - add this manually:"
+    echo "{ run = 'mpc clear && mpc add \"\$1\" && mpc play', orphan = true, desc = \"Play with mpd\" },"
+fi
+
+echo "Done. Restart your shell or run: source ~/.bashrc"
