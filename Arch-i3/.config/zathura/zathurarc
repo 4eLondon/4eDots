@@ -1,0 +1,9 @@
+# Clipboard settings
+set selection-clipboard clipboard
+
+# Zoom and scroll
+set scroll-step 50
+set zoom-step 10
+
+# Enable incremental search
+set incremental-search true
