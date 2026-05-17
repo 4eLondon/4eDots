@@ -1,22 +1,20 @@
+
 #!/usr/bin/env bash
 
-THEMES=(b1 y1 g1 r1)
-WALLPAPERS=(W1 W2 W3 W4)
-MODES=(fill fill fit fill)
+THEMES=(w1 w2 w3 w4 w5 w6 w7 w8 w9 w10)
+WALLPAPERS=(W1 W2 W3 W4 W5 W6 W7 W8 W9 W10)
+MODES=(fill fill fit fill fill fill fill fill fill fill)
 WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
 FOOT_CFG="$HOME/.config/foot/foot.ini"
 SWAY_CFG="$HOME/.config/sway/config"
 
 usage() {
-    echo "Usage: $0 [1-4]"
-    echo "  1 = b1 theme + W1 wallpaper"
-    echo "  2 = y1 theme + W2 wallpaper"
-    echo "  3 = g1 theme + W3 wallpaper"
-    echo "  4 = r1 theme + W4 wallpaper"
+    echo "Usage: $0 [1-10]"
+    echo "  1 = foot w1 theme + W10 wallpaper"
     exit 1
 }
 
-[[ -z "$1" || "$1" -lt 1 || "$1" -gt 4 ]] && usage
+[[ -z "$1" || "$1" -lt 1 || "$1" -gt 10 ]] && usage
 
 IDX=$(( $1 - 1 ))
 THEME="${THEMES[$IDX]}"
@@ -26,11 +24,14 @@ MODE="${MODES[$IDX]}"
 # Switch foot theme
 sed -i "s|^include=.*\.ini|include=~/.config/foot/${THEME}.ini|" "$FOOT_CFG"
 
+# Reload all open foot instances
+pkill -USR1 foot 2>/dev/null
+
 # Comment all wallpaper lines, then uncomment the chosen one
 sed -i -E 's|^(output \* bg ~/Pictures/Wallpapers/W[0-9]+\.jpg.*)$|#\1|' "$SWAY_CFG"
 sed -i -E "s|^#(output \* bg ~/Pictures/Wallpapers/${WALL}\.jpg.*)$|\1|" "$SWAY_CFG"
 
-# Apply wallpaper
+# Apply wallpaper immediately
 swaymsg "output * bg $WALLPAPER_DIR/${WALL}.jpg $MODE"
 
-echo "Switched to theme: $THEME | wallpaper: $WALL"
+echo "Switched to theme: $THEME | wallpaper: $WALL ($MODE)"
