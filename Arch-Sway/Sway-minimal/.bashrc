@@ -46,7 +46,6 @@ alias qe='pacman -Qe'
 alias df='df -h'
 alias du='df -h'
 
-
 # + + [ User Aliases ]
 
 # --Text editors
@@ -69,6 +68,7 @@ alias ll='eza -a --color=auto --icons'
 alias lo='eza --tree -a --icons -I ".git|node_modules|.venv"'
 alias copy='wl-copy'
 alias ff='fastfetch'
+alias disk='ncdu'
 
 # --Git
 alias gs='git status'
@@ -81,12 +81,13 @@ alias gr='git rm'
 alias gp='git pull'
 alias gmr='git merge'
 alias gl='git log --oneline --graph --decorate --all -10'
-alias gla='git log --oneline --graph --decorate --all'
+alias gll='git log --oneline --graph --decorate --all'
 alias gm='git commit -m'
 
 # --Misc
 alias fir='firefox'
 alias fira='firefox --private-window'
+alias chistory='echo "" > ~/.bash_history'
 
 # = = = = = Functions = = = = =
 
@@ -188,6 +189,24 @@ parse_git() {
 
 PS1='\[\033[34m\]\u\[\033[00m\]@\[\033[36m\]\h\[\033[00m\]:\[\033[34m\]\w\[\033[32m\]$(parse_git)\[\033[00m\]\$ '
 
+# -- Checkfolders for git chnages
+projects_status() {
+  local dir="${1:-.}"
+  for repo in "$dir"/*/; do
+    [ -d "$repo/.git" ] || continue
+    local branch=$(git -C "$repo" symbolic-ref --short HEAD 2>/dev/null)
+    local changes=$(git -C "$repo" status --porcelain 2>/dev/null)
+    local name=$(basename "$repo")
+
+    if [ -n "$changes" ]; then
+      printf "\033[33m⚠  %-20s\033[0m (\033[32m%s\033[0m) — uncommitted changes\n" "$name" "$branch"
+    else
+      printf "\033[32m✔  %-20s\033[0m (\033[32m%s\033[0m) — clean\n" "$name" "$branch"
+    fi
+  done
+}
+
+
 # -- Music player via mpc
 muse() {
   case "$1" in
@@ -210,3 +229,6 @@ muse() {
   esac
 }
 export MPD_HOST=~/.local/share/mpd/socket
+
+
+
