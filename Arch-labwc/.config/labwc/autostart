@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# PipeWire
+pipewire &
+pipewire-pulse &
+wireplumber &
+
+# Notifications
+dunst &
+
+# Polkit agent (for GUI auth)
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+# Wallpaper
+swaybg -i ~/Pictures/Wallpapers/W7.jpg -m fill &
+
+# Bar
+waybar &
+
