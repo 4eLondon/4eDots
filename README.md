@@ -52,34 +52,12 @@ Each configuration includes setups for:
 </p>
 
 
+| Window Manager | Protocol | Idle RAM | CPU Usage | GPU Usage | Notes |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **i3** | X11 | ~15–26 MB | Very Low | Negligible | Mature, stable, minimal resource footprint. Best for older hardware. |
+| **bspwm** | X11 | ~15–20 MB | Very Low | Negligible | Extremely lightweight, scriptable via shell. No built-in bar/keybinds. |
+| **Sway** | Wayland | ~40–60 MB | Low | Low | i3-compatible config. Stable, efficient, native Wayland support. |
+| **Hyprland** | Wayland | ~80–150 MB | Moderate | High | Animated, modern features. Higher GPU/CPU overhead due to effects. |
+| **labwc** | Wayland | ~30–50 MB | Low | Low | Openbox-like stacking WM. Lightweight and uses wayland. |
 
-## 🚀 Quick Start
 
-1. Clone this repository:
-```bash
-git clone https://github.com/4eLondon/4e_dotfiles.git
-cd 4e_dotfiles
-```
-
-2. Choose your window manager and copy the configs:
-```bash
-# For i3
-cp -r i3Dots/* ~/.config/
-
-# For bspwm
-cp -r bspwmDots/* ~/.config/
-
-# For Sway
-cp -r swayDots/* ~/.config/
-```
-
-3. Make scripts executable:
-```bash
-chmod +x ~/.config/*/script/*
-```
-
-4. Restart your window manager or log out and back in.
-
-## 📝 Note
-
-These are my personal configurations. Feel free to use them as inspiration or a starting point for your own setup. Adjust keybindings, colors, and settings to match your preferences.
