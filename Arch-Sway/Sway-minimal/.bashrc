@@ -48,19 +48,19 @@ alias du='df -h'
 
 # + + [ User Aliases ]
 
-# --Text editors
+# -- Text editors
 alias v='nvim'
 alias vv='vim'
 export EDITOR=nvim
 
-# --Python
+# -- Python
 alias py='python3'
 alias pyserver='python -m http.server 8000'
 alias newve='python3 -m venv .venv'
 alias openve='source .venv/bin/activate'
 alias closeve='deactivate'
 
-# --Tools
+# -- Tools
 export BAT_THEME="Nord"
 eval "$(zoxide init bash)"
 eval "$(fzf --bash)"
@@ -70,7 +70,7 @@ alias copy='wl-copy'
 alias ff='fastfetch'
 alias disk='ncdu'
 
-# --Git
+# -- Git
 alias gs='git status'
 alias ga='git add'
 alias gd='git diff'
@@ -84,14 +84,15 @@ alias gl='git log --oneline --graph --decorate --all -10'
 alias gll='git log --oneline --graph --decorate --all'
 alias gm='git commit -m'
 
-# --Misc
+# -- Misc
 alias fir='firefox'
 alias fira='firefox --private-window'
 alias chistory='echo "" > ~/.bash_history'
+alias of='onefetch'
 
 # = = = = = Functions = = = = =
 
-# --Yazi
+# -- Yazi
 function yy() {
 local tmp="$(mktemp -t yazi-cwd.XXXXXX)"
   yazi "$@" --cwd-file="$tmp"
@@ -101,7 +102,7 @@ local tmp="$(mktemp -t yazi-cwd.XXXXXX)"
   rm -f -- "$tmp"
 }
 
-# --MountUsb
+# -- Mount usbs
 usb() {
   local action=$1
   local device=$2
@@ -136,7 +137,7 @@ usb() {
 }
 
 
-# --Extract
+# -- Extract archives
 extr() {
     if [ -f "$1" ]; then
         case "$1" in
@@ -190,7 +191,7 @@ parse_git() {
 PS1='\[\033[34m\]\u\[\033[00m\]@\[\033[36m\]\h\[\033[00m\]:\[\033[34m\]\w\[\033[32m\]$(parse_git)\[\033[00m\]\$ '
 
 # -- Checkfolders for git chnages
-projects_status() {
+git_check() {
   local dir="${1:-.}"
   for repo in "$dir"/*/; do
     [ -d "$repo/.git" ] || continue
