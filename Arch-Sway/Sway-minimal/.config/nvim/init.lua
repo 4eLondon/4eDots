@@ -20,15 +20,6 @@ vim.opt.showbreak = "↪ "
 vim.opt.breakindent = true
 vim.opt.breakindentopt = "shift:2"
 
--- Show hidden characters
-vim.opt.list = true
-vim.opt.listchars = {
-    trail = "·",
-    extends = "→",
-    precedes = "←",
-    nbsp = "␣",
-}
-
 -- Folds
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
@@ -200,6 +191,36 @@ require("lazy").setup({
             require("nvim-autopairs").setup({})
         end,
     },
+
+    -- Show git signs
+{
+    "lewis6991/gitsigns.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    config = function()
+        require("gitsigns").setup({
+            signs = {
+                add          = { text = "▎" },
+                change       = { text = "▎" },
+                delete       = { text = "▁" },
+                topdelete    = { text = "▔" },
+                changedelete = { text = "▎" },
+            },
+            current_line_blame = true,
+            current_line_blame_opts = {
+                delay = 300,
+                virt_text_pos = "eol",
+            },
+        })
+
+        local gs = require("gitsigns")
+        vim.keymap.set("n", "]c", gs.next_hunk)
+        vim.keymap.set("n", "[c", gs.prev_hunk)
+        vim.keymap.set("n", "<leader>gb", gs.blame_line)
+        vim.keymap.set("n", "<leader>gd", gs.diffthis)
+        vim.keymap.set("n", "<leader>gp", gs.preview_hunk)
+    end,
+},
+
 })
 
 -- Diagnostics
