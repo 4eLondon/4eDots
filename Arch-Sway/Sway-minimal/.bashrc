@@ -14,6 +14,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export PATH="$HOME/.bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 bind "set completion-ignore-case on"
 bind "set show-all-if-ambiguous on"
 
@@ -30,8 +31,9 @@ shopt -s extglob
 # -- History
 HISTCONTROL=ignoreboth:erasedups
 shopt -s histappend
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=100000
+HISTFILESIZE=200000
+HISTTIMEFORMAT="%F %T "
 
 
 # = = = = = Aliases = = = = =
@@ -48,19 +50,20 @@ alias du='df -h'
 
 # + + [ User Aliases ]
 
-# -- Text editors
+# --Text editors
 alias v='nvim'
 alias vv='vim'
 export EDITOR=nvim
 
-# -- Python
+
+# --Python
 alias py='python3'
 alias pyserver='python -m http.server 8000'
 alias newve='python3 -m venv .venv'
 alias openve='source .venv/bin/activate'
 alias closeve='deactivate'
 
-# -- Tools
+# --Tools
 export BAT_THEME="Nord"
 eval "$(zoxide init bash)"
 eval "$(fzf --bash)"
@@ -70,7 +73,7 @@ alias copy='wl-copy'
 alias ff='fastfetch'
 alias disk='ncdu'
 
-# -- Git
+# --Git
 alias gs='git status'
 alias ga='git add'
 alias gd='git diff'
@@ -83,16 +86,47 @@ alias gmr='git merge'
 alias gl='git log --oneline --graph --decorate --all -10'
 alias gll='git log --oneline --graph --decorate --all'
 alias gm='git commit -m'
+alias of='onefetch'
 
-# -- Misc
+# --Misc
 alias fir='firefox'
 alias fira='firefox --private-window'
 alias chistory='echo "" > ~/.bash_history'
-alias of='onefetch'
+alias splink='adb tcpip 5555'
+alias plink='adb connect 192.168.192.15'
+alias pdlink='adb disconnect 192.168.192.15'
+export _JAVA_AWT_WM_NONREPARENTING=1
+alias ghidra='GDK_BACKEND=x11 ghidra'
+
+# --Shell
+alias battery='echo "$(cat /sys/class/power_supply/BAT0/capacity)% - $(cat /sys/class/power_supply/BAT0/status)"'
+alias pdfread='pdftotext'
+alias vol='amixer get Master'
+alias vol+='amixer set Master 5%+'
+alias vol-='amixer set Master 5%-'
+alias mute='amixer set Master toggle'
+alias bright='brightnessctl get'
+alias bright+='brightnessctl set +10%'
+alias bright-='brightnessctl set 10%-'
+alias cal='cal -3'
+alias ping='ping -c 5'
+alias clock='watch -n 1 date'
+alias psa='ps aux | fzf'
+alias kpsa='ps aux | fzf | awk "{print \$2}" | xargs kill -9'
 
 # = = = = = Functions = = = = =
 
-# -- Yazi
+# -- Print status
+pcstatus() {
+  iwctl station wlan0 show 2>/dev/null | awk '/Connected network|State|Signal/ {gsub(/^[ \t]+/,"",$0); print}'
+  echo "Battery:    $(cat /sys/class/power_supply/BAT0/capacity)% - $(cat /sys/class/power_supply/BAT0/status)"
+  echo "Brightness: $(brightnessctl get) / $(brightnessctl max)"
+  amixer get Master | grep -oP '\d+%' | head -1 | xargs -I{} echo "Volume:     {}"
+  free -h | awk '/Mem:/ {print "RAM:        "$3" / "$2}'
+  df -h / | awk 'NR==2 {print "Disk:       "$3" / "$2" ("$5" used)"}'
+}
+
+# --Yazi
 function yy() {
 local tmp="$(mktemp -t yazi-cwd.XXXXXX)"
   yazi "$@" --cwd-file="$tmp"
@@ -102,7 +136,7 @@ local tmp="$(mktemp -t yazi-cwd.XXXXXX)"
   rm -f -- "$tmp"
 }
 
-# -- Mount usbs
+# --MountUsb
 usb() {
   local action=$1
   local device=$2
@@ -137,7 +171,7 @@ usb() {
 }
 
 
-# -- Extract archives
+# --Extract
 extr() {
     if [ -f "$1" ]; then
         case "$1" in
@@ -191,7 +225,7 @@ parse_git() {
 PS1='\[\033[34m\]\u\[\033[00m\]@\[\033[36m\]\h\[\033[00m\]:\[\033[34m\]\w\[\033[32m\]$(parse_git)\[\033[00m\]\$ '
 
 # -- Checkfolders for git chnages
-git_check() {
+git_list() {
   local dir="${1:-.}"
   for repo in "$dir"/*/; do
     [ -d "$repo/.git" ] || continue
