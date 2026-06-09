@@ -79,9 +79,9 @@ alias ga='git add'
 alias gd='git diff'
 alias gc='git checkout'
 alias gb='git branch'
-alias gpu='git push'
+alias gpu='git pull'
 alias gr='git rm'
-alias gp='git pull'
+alias gp='git push'
 alias gmr='git merge'
 alias gl='git log --oneline --graph --decorate --all -10'
 alias gll='git log --oneline --graph --decorate --all'
@@ -224,8 +224,8 @@ parse_git() {
 
 PS1='\[\033[34m\]\u\[\033[00m\]@\[\033[36m\]\h\[\033[00m\]:\[\033[34m\]\w\[\033[32m\]$(parse_git)\[\033[00m\]\$ '
 
-# -- Checkfolders for git chnages
-git_list() {
+# -- Checkfolders for git changes
+gpstat() {
   local dir="${1:-.}"
   for repo in "$dir"/*/; do
     [ -d "$repo/.git" ] || continue
@@ -233,10 +233,20 @@ git_list() {
     local changes=$(git -C "$repo" status --porcelain 2>/dev/null)
     local name=$(basename "$repo")
 
-    if [ -n "$changes" ]; then
-      printf "\033[33m⚠  %-20s\033[0m (\033[32m%s\033[0m) — uncommitted changes\n" "$name" "$branch"
+    # Check push status
+    local upstream=$(git -C "$repo" rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
+    local push_status=""
+    if [ -z "$upstream" ]; then
+      push_status=" \033[35m[no remote]\033[0m"
     else
-      printf "\033[32m✔  %-20s\033[0m (\033[32m%s\033[0m) — clean\n" "$name" "$branch"
+      local unpushed=$(git -C "$repo" rev-list @{u}..HEAD 2>/dev/null | wc -l)
+      [ "$unpushed" -gt 0 ] && push_status=" \033[31m[↑ $unpushed unpushed]\033[0m"
+    fi
+
+    if [ -n "$changes" ]; then
+      printf "\033[33m⚠  %-20s\033[0m (\033[32m%s\033[0m) — uncommitted changes%b\n" "$name" "$branch" "$push_status"
+    else
+      printf "\033[32m✔  %-20s\033[0m (\033[32m%s\033[0m) — clean%b\n" "$name" "$branch" "$push_status"
     fi
   done
 }
