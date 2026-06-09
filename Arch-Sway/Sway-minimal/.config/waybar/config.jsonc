@@ -126,7 +126,7 @@
             "warning": 30,
             "critical": 15
         },
-        "interval": 4,
+        "interval": 1,
         "format": "{capacity}% {icon}",
         "format-charging": "{capacity}% 󱐋",
         "format-plugged": "{capacity}% ",
