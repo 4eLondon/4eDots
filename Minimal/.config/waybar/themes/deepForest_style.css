@@ -127,6 +127,33 @@
     margin: 0;
 }
 
+/* CPU/memory usage gradient: color ramps from green (idle) to red (maxed),
+   using colors already in the palette */
+#cpu.u20,
+#memory.u20 {
+    color: @color3;
+}
+
+#cpu.u40,
+#memory.u40 {
+    color: @color10;
+}
+
+#cpu.u60,
+#memory.u60 {
+    color: @color12;
+}
+
+#cpu.u80,
+#memory.u80 {
+    color: @color9;
+}
+
+#cpu.u100,
+#memory.u100 {
+    color: @color13;
+}
+
 #backlight:hover,
 #cpu:hover,
 #network:hover,
