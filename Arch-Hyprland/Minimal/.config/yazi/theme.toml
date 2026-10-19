@@ -1,0 +1,6 @@
+[filetype]
+rules = [
+  { url = "*/",  fg = "#fece46" },
+  { url = "*", is = "link",   fg = "#b87c00" },
+  { url = "*", is = "orphan", fg = "#ffe07a" },
+]

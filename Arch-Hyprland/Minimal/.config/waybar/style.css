@@ -1,0 +1,154 @@
+@import "colors.css";
+
+* {
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    /*font-family: 'JetBrainsMono Nerd Font';*/
+    font-family: "GohuFont 11 Nerd Font";
+    font-size: 14px;
+    min-height: 0px;
+}
+
+#waybar {
+    background: transparent;
+}
+
+.modules-left {
+    margin-left: 5px;
+}
+
+.modules-center {
+    margin: 5px 5px;
+}
+
+.modules-right {
+    margin-right: 5px;
+}
+
+#clock {
+    background-color: alpha(@background, .65);
+    color: @foreground;
+    padding: 0 15px;
+    margin: 10px 0px 10px 5px;
+    border-radius: 20px;
+}
+
+#workspaces {
+    background-color: alpha(@background, .65);
+    border: none;
+    padding: 2px 8px;
+    margin: 10px 6px;
+    border-radius: 20px;
+}
+
+#workspaces button {
+    min-width: 22px;
+    min-height: 22px;
+    padding: 0px;
+    margin: 6px 3px;
+    color: alpha(@foreground, .5);
+    border-radius: 50%;
+    background-color: alpha(@color4, .8);
+}
+
+#workspaces button.active {
+    min-width: 22px;
+    min-height: 22px;
+    padding: 0px;
+    margin: 6px 3px;
+    background: @foreground;
+    color: @background;
+    border-radius: 50%;
+    opacity: 1;
+}
+
+#workspaces button.empty {
+    opacity: 0.5;
+}
+
+#workspaces button.empty.active {
+    opacity: 1;
+}
+
+#workspaces button.active:hover,
+#workspaces button:hover {
+    background-color: @color9;
+    color: @background;
+    opacity: 1;
+    transition: .3s;
+}
+
+#clock.date {
+    background-color: alpha(@background, .65);
+    color: @foreground;
+    padding: 5px 20px;
+    border-radius: 20px;
+}
+
+#mpris {
+    background: alpha(@background, .65);
+    color: @color14;
+    border-radius: 20px;
+    padding: 0px 12px;
+    margin: 10px 5px;
+}
+
+#mpris:hover {
+    color: @color9;
+    transition: .3s;
+}
+
+#mpris.empty {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+#right2 {
+    background-color: alpha(@background, .65);
+    border-radius: 20px;
+    padding: 0 18px;
+    margin: 10px 5px 10px 0px;
+}
+
+#tray,
+#memory,
+#backlight,
+#cpu,
+#battery,
+#network,
+#bluetooth,
+#pulseaudio {
+    background-color: transparent;
+    color: @foreground;
+    padding: 0 12px;
+    margin: 0;
+}
+
+#backlight:hover,
+#cpu:hover,
+#network:hover,
+#bluetooth:hover,
+#pulseaudio:hover {
+    color: @color9;
+    transition: .3s;
+}
+
+#battery.warning {
+    color: @color9;
+}
+
+#battery.critical {
+    color: @color13;
+}
+
+tooltip {
+    border-radius: 15px;
+    background: @background;
+    border: 2px solid alpha(@foreground, .5);
+}
+
+.hidden {
+    opacity: 0;
+}

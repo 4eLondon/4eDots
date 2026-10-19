@@ -1,0 +1,5 @@
+set recolor true
+set recolor-keephue true
+set recolor-lightcolor "#242424"
+set recolor-darkcolor  "#e0e0e0"
+map <C-r> feature recolor

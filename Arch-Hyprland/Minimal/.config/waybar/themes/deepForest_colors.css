@@ -1,0 +1,25 @@
+/* Waybar Deep forest theme colors*/
+
+@define-color background #191e19;
+@define-color foreground #e7e6d5;
+
+@define-color selection-background #58664f;
+@define-color selection-foreground #e7e6d5;
+
+@define-color color0 #191e19;
+@define-color color1 #9a5540;
+@define-color color2 #424c42;
+@define-color color3 #6a7857;
+@define-color color4 #47594d;
+@define-color color5 #724536;
+@define-color color6 #58664f;
+@define-color color7 #b6ba90;
+
+@define-color color8 #313830;
+@define-color color9 #cf7351;
+@define-color color10 #808b64;
+@define-color color11 #93a071;
+@define-color color12 #a8b375;
+@define-color color13 #c05939;
+@define-color color14 #cad1a4;
+@define-color color15 #e7e6d5;

@@ -1,0 +1,139 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
+  "logo": {
+    "source": "arch",
+    "color": {
+      "1": "blue",
+      "2": "cyan"
+    },
+    "padding": {
+      "right": 2
+    }
+  },
+
+  "display": {
+    "separator": "  ",
+    "color": "white"
+  },
+
+  "modules": [
+    {
+      "type": "title",
+      "color": {
+        "user": "blue",
+        "at": "cyan",
+        "host": "blue"
+      }
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[36m\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u001b[0m"
+    },
+    {
+      "type": "os",
+      "key": "\u001b[34m\uf17c\u001b[0m \u001b[34mOS\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "host",
+      "key": "\u001b[34m\uf109\u001b[0m \u001b[34mHost\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "kernel",
+      "key": "\u001b[34m\uf013\u001b[0m \u001b[34mKernel\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "uptime",
+      "key": "\u001b[34m\uf017\u001b[0m \u001b[34mUptime\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "packages",
+      "key": "\u001b[34m\uf187\u001b[0m \u001b[34mPackages\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "shell",
+      "key": "\u001b[34m\uf120\u001b[0m \u001b[34mShell\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "display",
+      "key": "\u001b[36m\uf26c\u001b[0m \u001b[36mDisplay\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "wm",
+      "key": "\u001b[36m\uf2d0\u001b[0m \u001b[36mWM\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "cursor",
+      "key": "\u001b[36m\uf245\u001b[0m \u001b[36mCursor\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "terminal",
+      "key": "\u001b[36m\uf120\u001b[0m \u001b[36mTerminal\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "terminalfont",
+      "key": "\u001b[36m\uf031\u001b[0m \u001b[36mTerm Font\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "cpu",
+      "key": "\u001b[33m\uf085\u001b[0m \u001b[33mCPU\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "gpu",
+      "key": "\u001b[33m\uf0c8\u001b[0m \u001b[33mGPU\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "memory",
+      "key": "\u001b[33m\uf233\u001b[0m \u001b[33mMemory\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "swap",
+      "key": "\u001b[33m\uf0ec\u001b[0m \u001b[33mSwap\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "disk",
+      "key": "\u001b[33m\uf0a0\u001b[0m \u001b[33mDisk\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "localip",
+      "key": "\u001b[33m\uf1eb\u001b[0m \u001b[33mLocal IP\u001b[0m",
+      "keyWidth": 18,
+      "showIpv6": false
+    },
+    {
+      "type": "battery",
+      "key": "\u001b[33m\uf240\u001b[0m \u001b[33mBattery\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "locale",
+      "key": "\u001b[33m\uf1ab\u001b[0m \u001b[33mLocale\u001b[0m",
+      "keyWidth": 18
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[36m\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u001b[0m"
+    },
+    {
+      "type": "colors",
+      "symbol": "block",
+      "paddingLeft": 1
+    }
+  ]
+}
