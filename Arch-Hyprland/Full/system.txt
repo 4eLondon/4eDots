@@ -1,0 +1,25 @@
+                                         
+                                         
+                                         
+                  -`                     OS    ➜  Arch Linux x86_64
+                 .o+`                     ├   ➜  Linux 7.0.11-arch1-1
+                `ooo/                     ├ 󰏖  ➜  1256 (pacman)
+               `+oooo:                    └   ➜  bash 5.3.15
+              `+oooooo:                  
+              -+oooooo+:                  ├   ➜  sshd
+            `/:-:++oooo+:                
+           `/++++/+++++++:               PC    ➜  LENOVO ideapad 330-15AST Type 81D6
+          `/++++++++++++++:               ├   ➜  AMD A6-9225 RADEON R4, 5 COMPUTE CORES 2C+3G (2) @ 2.60 GHz GHz
+         `/+++ooooooooooooo/`             ├ 󰢮  ➜  AMD AMD Radeon R4 Graphics @  GHz
+        ./ooosssso++osssssso+`            ├   ➜  1.27 GiB / 3.21 GiB (39%)
+       .oossssso-````/ossssss+`           ├ 󰓡  ➜  211.32 MiB / 1.61 GiB (13%)
+      -osssssso.      :ssssssso.          ├ 󰋊  ➜  15.50 GiB / 930.51 GiB (2%) - btrfs
+     :osssssss/        osssso+++.         └   ➜  1366x768 px @ 60 Hz - 340x190 mm (15.33 inches, 102.20 ppi)
+    /ossssssss/        +ssssooo/-        
+  `/ossssso+/:-        -:/+osssso+-      
+ `+sso+:-`                 `.-/+oso:
+`++:.                           `-/+/
+.`                                 `/
+
+
+
